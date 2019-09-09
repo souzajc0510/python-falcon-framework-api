@@ -1,0 +1,22 @@
+version: '2'
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "9000:8000"
+    volumes:
+      - ./app/.:/app
+    tty: true
+    links:
+      - postgresql
+    depends_on:
+      - postgresql
+
+  postgresql:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: test_dev
+      POSTGRES_USER: mertingen
+      POSTGRES_PASSWORD: mertingen
+    ports:
+      - '5432:5432'
